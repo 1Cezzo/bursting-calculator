@@ -19,6 +19,16 @@ public class BurstingCalculatorController {
         return "index";
     }
 
+    @GetMapping("/level-goal")
+    public String levelGoalCalculator() {
+        return "level-goal";
+    }
+
+    @GetMapping("/xp-hour")
+    public String xpHourCalculator() {
+        return "xp-hour";
+    }
+
     @PostMapping("/calculate")
     public ModelAndView calculate(@RequestParam("gearSetup") String gearSetup,
                                   @RequestParam("location") String location,

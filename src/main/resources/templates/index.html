@@ -4,22 +4,20 @@
     <title>Bursting Calculator</title>
     <!-- Add your CSS file link here -->
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        body {
+            background-image: url("/images/backgrounds/osrs_background.png");
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
-    <h1 th:text="${message}"></h1>
-    <form action="/calculate" method="post">
-        <label for="gearSetup">Gear Setup:</label>
-        <input type="text" name="gearSetup" id="gearSetup" required>
-        <br>
-        <label for="location">Location:</label>
-        <input type="text" name="location" id="location" required>
-        <br>
-        <label for="spell">Spell:</label>
-        <input type="text" name="spell" id="spell" required>
-        <br>
-        <button type="submit">Calculate</button>
-    </form>
-    <!-- Add your JavaScript file link here -->
-    <script src="script.js"></script>
+    <div class="container">
+        <h1>Welcome to Bursting Calculator</h1>
+        <div class="button-container">
+            <a th:href="@{/level-goal}" class="btn">Time to reach Level</a>
+            <a th:href="@{/xp-hour}" class="btn">Xp/Hour Calculator</a>
+        </div>
+    </div>
 </body>
 </html>
