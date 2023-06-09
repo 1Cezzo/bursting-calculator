@@ -1,28 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Bursting Calculator</title>
     <!-- Add your CSS file link here -->
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
-<body>
+<body class="mw-body">
     <script src="https://kit.fontawesome.com/b88730ab5f.js" crossorigin="anonymous"></script>
     <a href="/" class="home-button">
         <i class="fa fa-home"></i>
     </a>
     <h1 th:text="${message}"></h1>
-    <form action="/calculate" method="post">
-        <label for="gearSetup">Gear Setup:</label>
-        <input type="text" name="gearSetup" id="gearSetup" required>
-        <br>
-        <label for="location">Location:</label>
-        <input type="text" name="location" id="location" required>
-        <br>
-        <label for="spell">Spell:</label>
-        <input type="text" name="spell" id="spell" required>
-        <br>
-        <button type="submit">Calculate</button>
-    </form>
+    <div class="dropdown">
+        <button onclick="toggleDropdown()" class="dropbtn">
+            <span id="selected-item-text">Select Helmet</span>
+        </button>
+        <div id="dropdown-content" class="dropdown-content">
+            <input type="text" id="search-input" placeholder="Search..." oninput="filterItems()">
+            <a href="#" onclick="selectItem('Blue wizard hat', '/images/icons/blue_wizard_hat.png')">Blue wizard hat</a>
+            <a href="#" onclick="selectItem('Ancestral hat', '/images/icons/ancestral_hat.png')">Ancestral hat</a>
+
+            <!-- Add more dropdown items here -->
+        </div>
+    </div>
+
+    <table class="equipment equipment-right">
+    <tbody>
+        <tr>
+            <td>
+                <div class="equipment-div">
+                    <div th:class="${selectedItemText != null ? 'equipment-head equipment-blank' : 'equipment-head'}">
+                        <div class="equipment-plinkp" th:if="${selectedItemText != null}">
+                            <a th:href="@{'https://oldschool.runescape.wiki/w/' + ${selectedItemText.replace(' ', '_')}}" th:title="${selectedItemText}">
+                                <img id="helmet-image" decoding="async" width="30" height="27" data-file-width="30" data-file-height="27">
+                            </a>
+                        </div>
+                    </div>            
+                    <!-- Add more table cells (td) and their contents here -->
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
     <!-- Add your JavaScript file link here -->
     <script src="script.js"></script>
 </body>
