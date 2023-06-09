@@ -1,3 +1,8 @@
+window.onload = function() {
+    selectedItemText.textContent = "Helmet"; // Set initial selected item to "Helmet"
+    updateHelmetImage("")
+};
+
 // Get the elements
 var dropdownContent = document.getElementById("dropdown-content");
 var searchInput = document.getElementById("search-input");
@@ -23,16 +28,58 @@ function filterItems() {
     }
 }
 
-// Function to set the selected item
 function selectItem(itemText, imageUrl) {
     selectedItemText.textContent = itemText;
     toggleDropdown();
     updateHelmetImage(imageUrl);
 }
 
-// Function to update the helmet image
+function selectItem(itemText, imageUrl) {
+    selectedItemText.textContent = itemText;
+    toggleDropdown();
+    updateHelmetImage(imageUrl);
+}
+
 function updateHelmetImage(imageUrl) {
     var helmetImage = document.getElementById("helmet-image");
+    var helmetLink = document.getElementById("helmet-link");
+    var equipmentHead = document.getElementById("equipment-head");
+    var equipmentPlinkp = document.getElementById("equipment-plinkp");
+
     helmetImage.src = imageUrl;
+    helmetLink.href = "https://oldschool.runescape.wiki/w/" + selectedItemText.textContent.replace(/\s+/g, "_");
+
+    if (selectedItemText.textContent === "Helmet") {
+        equipmentHead.classList.remove("equipment-blank");
+        equipmentPlinkp.style.display = "none";
+    } else {
+        equipmentHead.classList.add("equipment-blank");
+        equipmentPlinkp.style.display = "flex";
+    }
 }
+
+fetch('/api/helmets') // Update the URL to match your controller endpoint
+    .then(response => response.json())
+    .then(items => {
+        console.log('Items retrieved:', items);
+
+        const itemList = document.getElementById('item-list');
+        itemList.innerHTML = ''; // Clear the existing dropdown items
+
+        items.forEach(item => {
+            const link = document.createElement('a');
+            link.href = '#';
+            link.textContent = item.name;
+            link.onclick = () => selectItem(item.name, item.imageUrl);
+
+            const itemDiv = document.createElement('div');
+            itemDiv.appendChild(link);
+            itemList.appendChild(itemDiv);
+        });
+
+        console.log('Dropdown menu populated:', items);
+    })
+    .catch(error => {
+        console.error('Error retrieving items:', error);
+    });
 

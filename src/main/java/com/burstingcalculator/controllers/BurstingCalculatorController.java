@@ -1,5 +1,14 @@
 package com.burstingcalculator.controllers;
 
+import com.burstingcalculator.model.Item;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,7 +18,6 @@ import org.springframework.ui.Model;
 
 @Controller
 public class BurstingCalculatorController {
-
     @GetMapping("/")
     public String index(Model model) {
         // Add data to the model
@@ -27,6 +35,35 @@ public class BurstingCalculatorController {
     @GetMapping("/xp-hour")
     public String xpHourCalculator() {
         return "xp-hour";
+    }
+
+    @GetMapping("/api/helmets")
+    public ResponseEntity<String> getHelmets() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<Item> listOfHelmets = new ArrayList<>();
+        // Populate listOfHelmets with helmet items
+        listOfHelmets.add(new Item("Ancestral hat", "/images/icons/Ancestral_hat.png"));
+        listOfHelmets.add(new Item("Ahrim's hood", "/images/icons/Ahrim's_hood.png"));
+        listOfHelmets.add(new Item("Dagon'hai hat", "/images/icons/Dagon'hai_hat.png"));
+        // Add more helmet items as needed
+
+        try {
+            String json = objectMapper.writeValueAsString(listOfHelmets);
+            return ResponseEntity.ok(json);
+        } catch (JsonProcessingException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/api/amulets")
+    public List<Item> getAmulets() {
+        List<Item> listOfAmulets = new ArrayList<>();
+        // Populate listOfAmulets with amulet items
+        listOfAmulets.add(new Item("Amulet 1", "/images/amulet1.png"));
+        listOfAmulets.add(new Item("Amulet 2", "/images/amulet2.png"));
+        // Add more amulet items as needed
+        
+        return listOfAmulets;
     }
 
     @PostMapping("/calculate")
