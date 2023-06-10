@@ -71,38 +71,27 @@ function selectAmuletItem(itemText, imageUrl) {
     updateAmuletImage(imageUrl);
 }
 
-function updateHelmetImage(imageUrl) {
-    var helmetImage = document.getElementById("helmet-image");
-    var helmetLink = document.getElementById("helmet-link");
-    var equipmentHead = document.getElementById("equipment-head");
-    var equipmentPlinkp = document.getElementById("equipment-plinkp");
+function updateEquipmentItem(itemName, imageUrl, itemLink, equipmentElement) {
+    var itemImage = document.getElementById(itemName + "-image");
+    var itemLinkElement = document.getElementById(itemName + "-link");
 
-    helmetImage.src = imageUrl;
-    helmetLink.href = "https://oldschool.runescape.wiki/w/" + selectedHelmetText.textContent.replace(/\s+/g, "_");
+    itemImage.src = imageUrl;
+    itemLinkElement.href = itemLink;
 
-    if (selectedHelmetText.textContent === "Helmet") {
-        equipmentHead.classList.remove("equipment-blank");
-        equipmentPlinkp.style.display = "none";
+    if (itemName === "helmet" && selectedHelmetText.textContent === "Helmet" ||
+        itemName === "amulet" && selectedAmuletText.textContent === "Amulet") {
+        equipmentElement.classList.remove("equipment-blank");
     } else {
-        equipmentHead.classList.add("equipment-blank");
-        equipmentPlinkp.style.display = "flex";
+        equipmentElement.classList.add("equipment-blank");
     }
 }
 
-function updateAmuletImage(imageUrl) {
-    var amuletImage = document.getElementById("amulet-image");
-    var amuletLink = document.getElementById("amulet-link");
-    var equipmentAmulet = document.getElementById("equipment-amulet");
+function updateHelmetImage(imageUrl) {
+    var equipmentHead = document.getElementById("equipment-head");
     var equipmentPlinkp = document.getElementById("equipment-plinkp");
 
-    amuletImage.src = imageUrl;
-    amuletLink.href = "https://oldschool.runescape.wiki/w/" + selectedAmuletText.textContent.replace(/\s+/g, "_");
-
-    if (selectedAmuletText.textContent === "Amulet") {
-        equipmentAmulet.classList.remove("equipment-blank");
-    } else {
-        equipmentAmulet.classList.add("equipment-blank");
-    }
+    var itemLink = "https://oldschool.runescape.wiki/w/" + selectedHelmetText.textContent.replace(/\s+/g, "_");
+    updateEquipmentItem("helmet", imageUrl, itemLink, equipmentHead);
 
     if (selectedHelmetText.textContent === "Helmet" && selectedAmuletText.textContent === "Amulet") {
         equipmentPlinkp.style.display = "none";
@@ -110,6 +99,21 @@ function updateAmuletImage(imageUrl) {
         equipmentPlinkp.style.display = "flex";
     }
 }
+
+function updateAmuletImage(imageUrl) {
+    var equipmentAmulet = document.getElementById("equipment-amulet");
+    var equipmentPlinkp = document.getElementById("equipment-plinkp");
+
+    var itemLink = "https://oldschool.runescape.wiki/w/" + selectedAmuletText.textContent.replace(/\s+/g, "_");
+    updateEquipmentItem("amulet", imageUrl, itemLink, equipmentAmulet);
+
+    if (selectedHelmetText.textContent === "Helmet" && selectedAmuletText.textContent === "Amulet") {
+        equipmentPlinkp.style.display = "none";
+    } else {
+        equipmentPlinkp.style.display = "flex";
+    }
+}
+
 
 // Fetch helmet items
 fetch('/api/helmets')
