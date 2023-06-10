@@ -39,16 +39,16 @@ public class BurstingCalculatorController {
 
     @GetMapping("/api/helmets")
     public ResponseEntity<String> getHelmets() {
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapperHelmet = new ObjectMapper();
         List<Item> listOfHelmets = new ArrayList<>();
         // Populate listOfHelmets with helmet items
-        listOfHelmets.add(new Item("Ancestral hat", "/images/icons/Ancestral_hat.png"));
-        listOfHelmets.add(new Item("Ahrim's hood", "/images/icons/Ahrim's_hood.png"));
-        listOfHelmets.add(new Item("Dagon'hai hat", "/images/icons/Dagon'hai_hat.png"));
+        listOfHelmets.add(new Item("Ancestral hat", "/images/icons/helmets/Ancestral_hat.png"));
+        listOfHelmets.add(new Item("Ahrim's hood", "/images/icons/helmets/Ahrim's_hood.png"));
+        listOfHelmets.add(new Item("Dagon'hai hat", "/images/icons/helmets/Dagon'hai_hat.png"));
         // Add more helmet items as needed
 
         try {
-            String json = objectMapper.writeValueAsString(listOfHelmets);
+            String json = objectMapperHelmet.writeValueAsString(listOfHelmets);
             return ResponseEntity.ok(json);
         } catch (JsonProcessingException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -56,14 +56,19 @@ public class BurstingCalculatorController {
     }
 
     @GetMapping("/api/amulets")
-    public List<Item> getAmulets() {
+    public ResponseEntity<String> getAmulets() {
+        ObjectMapper objectMapperAmulet = new ObjectMapper();
         List<Item> listOfAmulets = new ArrayList<>();
         // Populate listOfAmulets with amulet items
-        listOfAmulets.add(new Item("Amulet 1", "/images/amulet1.png"));
-        listOfAmulets.add(new Item("Amulet 2", "/images/amulet2.png"));
+        listOfAmulets.add(new Item("Occult necklace", "/images/icons/amulets/Occult_necklace.png"));
         // Add more amulet items as needed
         
-        return listOfAmulets;
+        try {
+            String json = objectMapperAmulet.writeValueAsString(listOfAmulets);
+            return ResponseEntity.ok(json);
+        } catch (JsonProcessingException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @PostMapping("/calculate")

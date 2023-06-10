@@ -9,5 +9,4 @@ public class BurstingCalculatorApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BurstingCalculatorApplication.class, args);
 	}
-
 }

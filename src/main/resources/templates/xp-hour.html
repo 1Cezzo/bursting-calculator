@@ -12,16 +12,34 @@
     </a>
     <h1 th:text="${message}"></h1>
     <div class="dropdown">
-        <button onclick="toggleDropdown()" class="dropbtn">
-            <span id="selected-item-text">Helmet</span>
+        <button onclick="toggleHelmetDropdown()" class="dropbtn">
+            <span id="selected-helmet-text">Helmet</span>
+            <span class="arrow-icon"></span>
         </button>
-        <div id="dropdown-content" class="dropdown-content">
-            <input type="text" id="search-input" placeholder="Search..." oninput="filterItems()">
-            <a href="#" onclick="selectItem('Helmet', '')">Helmet</a>
-            <div id="item-list">
-                <!-- Dynamically populate the dropdown items using Thymeleaf -->
+        <div id="helmet-dropdown-content" class="dropdown-content">
+            <input type="text" id="helmet-search-input" placeholder="Search..." oninput="filterHelmetItems()">
+            <a href="#" onclick="selectHelmetItem('Helmet', '')">Helmet</a>
+            <div id="helmet-item-list">
+                <!-- Dynamically populate the helmet dropdown items using Thymeleaf -->
                 <div th:each="item : ${items}">
-                    <a href="#" th:text="${item.name}" th:data-name="${item.name}" th:data-image="${item.imageUrl}" onclick="selectItem(this.getAttribute('data-name'), this.getAttribute('data-image'))"></a>
+                    <a href="#" th:text="${item.name}" th:data-name="${item.name}" th:data-image="${item.imageUrl}" onclick="selectHelmetItem(this.getAttribute('data-name'), this.getAttribute('data-image'))"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="dropdown">
+        <button onclick="toggleAmuletDropdown()" class="dropbtn">
+            <span id="selected-amulet-text">Amulet</span>
+            <span class="arrow-icon"></span>
+        </button>
+        <div id="amulet-dropdown-content" class="dropdown-content">
+            <input type="text" id="amulet-search-input" placeholder="Search..." oninput="filterAmuletItems()">
+            <a href="#" onclick="selectAmuletItem('Amulet', '')">Amulet</a>
+            <div id="amulet-item-list">
+                <!-- Dynamically populate the amulet dropdown items using Thymeleaf -->
+                <div th:each="item : ${items}">
+                    <a href="#" th:text="${item.name}" th:data-name="${item.name}" th:data-image="${item.imageUrl}" onclick="selectAmuletItem(this.getAttribute('data-name'), this.getAttribute('data-image'))"></a>
                 </div>
             </div>
         </div>
@@ -35,12 +53,19 @@
                 <div class="equipment-div">
                     <div id="equipment-head" class="equipment-head">
                         <div class="equipment-plinkp" id="equipment-plinkp">
-                            <a id="helmet-link" th:title="${selectedItemText}">
-                                <img id="helmet-image" decoding="async" width="30" height="27" data-file-width="30" data-file-height="27">
-                            </a>
+                            <a id="helmet-link" th:title="${selectHelmetItem}">
+                                <img id="helmet-image" decoding="async" style="width: 100%;">
+                              </a>
                         </div>
                     </div>
                     
+                    <div id="equipment-amulet" class="equipment-amulet">
+                        <div class="equipment-plinkp" id="equipment-plinkp">
+                            <a id="amulet-link" th:title="${selectAmuletItem}">
+                                <img id="amulet-image" decoding="async" style="width: 100%;">
+                              </a>
+                        </div>
+                    </div>
     
                     <!-- Add more table cells (td) and their contents here -->
                 </div>
