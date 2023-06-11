@@ -246,158 +246,51 @@ function updateEquipmentItem(itemName, imageUrl, itemLink, equipmentElement) {
 
 function updateHelmetImage(imageUrl) {
     var equipmentHead = document.getElementById("equipment-head");
-    var equipmentPlinkp = document.getElementById("equipment-plinkp-helmet");
-
     var itemLink = "https://oldschool.runescape.wiki/w/" + selectedHelmetText.textContent.replace(/\s+/g, "_");
-    updateEquipmentItem("helmet", imageUrl, itemLink, equipmentHead);
 
-    if (
-        selectedHelmetText.textContent === "Helmet" &&
-        selectedAmuletText.textContent === "Amulet" &&
-        selectedCapeText.textContent === "Cape" &&
-        selectedWeaponText.textContent === "Weapon" &&
-        selectedTorsoText.textContent === "Torso" &&
-        selectedShieldText.textContent === "Shield" && 
-        selectedLegsText.textContent === "Legs"
-    ) {
-        equipmentPlinkp.style.display = "none";
-    } else {
-        equipmentPlinkp.style.display = "flex";
-    }
+    updateEquipmentItem("helmet", imageUrl, itemLink, equipmentHead);
 }
 
 function updateAmuletImage(imageUrl) {
     var equipmentAmulet = document.getElementById("equipment-amulet");
-    var equipmentPlinkp = document.getElementById("equipment-plinkp-amulet");
-
     var itemLink = "https://oldschool.runescape.wiki/w/" + selectedAmuletText.textContent.replace(/\s+/g, "_");
-    updateEquipmentItem("amulet", imageUrl, itemLink, equipmentAmulet);
 
-    if (
-        selectedHelmetText.textContent === "Helmet" &&
-        selectedAmuletText.textContent === "Amulet" &&
-        selectedCapeText.textContent === "Cape" &&
-        selectedWeaponText.textContent === "Weapon" &&
-        selectedTorsoText.textContent === "Torso" &&
-        selectedShieldText.textContent === "Shield" &&
-        selectedLegsText.textContent === "Legs"
-    ) {
-        equipmentPlinkp.style.display = "none";
-    } else {
-        equipmentPlinkp.style.display = "flex";
-    }
+    updateEquipmentItem("amulet", imageUrl, itemLink, equipmentAmulet);
 }
 
 function updateCapeImage(imageUrl) {
     var equipmentCape = document.getElementById("equipment-cape");
-    var equipmentPlinkp = document.getElementById("equipment-plinkp-cape");
-
     var itemLink = "https://oldschool.runescape.wiki/w/" + selectedCapeText.textContent.replace(/\s+/g, "_");
-    updateEquipmentItem("cape", imageUrl, itemLink, equipmentCape);
 
-    if (
-        selectedHelmetText.textContent === "Helmet" &&
-        selectedAmuletText.textContent === "Amulet" &&
-        selectedCapeText.textContent === "Cape" &&
-        selectedWeaponText.textContent === "Weapon" &&
-        selectedTorsoText.textContent === "Torso" &&
-        selectedShieldText.textContent === "Shield" && 
-        selectedLegsText.textContent === "Legs"
-    ) {
-        equipmentPlinkp.style.display = "none";
-    } else {
-        equipmentPlinkp.style.display = "flex";
-    }
+    updateEquipmentItem("cape", imageUrl, itemLink, equipmentCape);
 }
 
 function updateWeaponImage(imageUrl) {
     var equipmentWeapon = document.getElementById("equipment-weapon");
-    var equipmentPlinkp = document.getElementById("equipment-plinkp-weapon");
-
     var itemLink = "https://oldschool.runescape.wiki/w/" + selectedWeaponText.textContent.replace(/\s+/g, "_");
-    updateEquipmentItem("weapon", imageUrl, itemLink, equipmentWeapon);
 
-    if (
-        selectedHelmetText.textContent === "Helmet" &&
-        selectedAmuletText.textContent === "Amulet" &&
-        selectedCapeText.textContent === "Cape" &&
-        selectedWeaponText.textContent === "Weapon" &&
-        selectedTorsoText.textContent === "Torso" &&
-        selectedShieldText.textContent === "Shield" &&
-        selectedLegsText.textContent === "Legs"
-    ) {
-        equipmentPlinkp.style.display = "none";
-    } else {
-        equipmentPlinkp.style.display = "flex";
-    }
+    updateEquipmentItem("weapon", imageUrl, itemLink, equipmentWeapon);
 }
 
 function updateTorsoImage(imageUrl) {
     var equipmentTorso = document.getElementById("equipment-torso");
-    var equipmentPlinkp = document.getElementById("equipment-plinkp-torso");
-
     var itemLink = "https://oldschool.runescape.wiki/w/" + selectedTorsoText.textContent.replace(/\s+/g, "_");
-    updateEquipmentItem("torso", imageUrl, itemLink, equipmentTorso);
 
-    if (
-        selectedHelmetText.textContent === "Helmet" &&
-        selectedAmuletText.textContent === "Amulet" &&
-        selectedCapeText.textContent === "Cape" &&
-        selectedWeaponText.textContent === "Weapon" &&
-        selectedTorsoText.textContent === "Torso" &&
-        selectedShieldText.textContent === "Shield" &&
-        selectedLegsText.textContent === "Legs"
-    ) {
-        equipmentPlinkp.style.display = "none";
-    } else {
-        equipmentPlinkp.style.display = "flex";
-    }
+    updateEquipmentItem("torso", imageUrl, itemLink, equipmentTorso);
 }
 
 function updateShieldImage(imageUrl) {
     var equipmentShield = document.getElementById("equipment-shield");
-    var equipmentPlinkp = document.getElementById("equipment-plinkp-shield");
-
     var itemLink = "https://oldschool.runescape.wiki/w/" + selectedShieldText.textContent.replace(/\s+/g, "_");
-    updateEquipmentItem("shield", imageUrl, itemLink, equipmentShield);
 
-    if (
-        selectedHelmetText.textContent === "Helmet" &&
-        selectedAmuletText.textContent === "Amulet" &&
-        selectedCapeText.textContent === "Cape" &&
-        selectedWeaponText.textContent === "Weapon" &&
-        selectedTorsoText.textContent === "Torso" &&
-        selectedShieldText.textContent === "Shield" && 
-        selectedLegsText.textContent === "Legs"
-    ) {
-        equipmentPlinkp.style.display = "none";
-    }
-    else {
-        equipmentPlinkp.style.display = "flex";
-    }
+    updateEquipmentItem("shield", imageUrl, itemLink, equipmentShield);
 }
 
 function updateLegsImage(imageUrl) {
     var equipmentLegs = document.getElementById("equipment-legs");
-    var equipmentPlinkp = document.getElementById("equipment-plinkp-legs");
-
     var itemLink = "https://oldschool.runescape.wiki/w/" + selectedLegsText.textContent.replace(/\s+/g, "_");
-    updateEquipmentItem("legs", imageUrl, itemLink, equipmentLegs);
 
-    if (
-        selectedHelmetText.textContent === "Helmet" &&
-        selectedAmuletText.textContent === "Amulet" &&
-        selectedCapeText.textContent === "Cape" &&
-        selectedWeaponText.textContent === "Weapon" &&
-        selectedTorsoText.textContent === "Torso" &&
-        selectedShieldText.textContent === "Shield" &&
-        selectedLegsText.textContent === "Legs"
-    ) {
-        equipmentPlinkp.style.display = "none";
-    }
-    else {
-        equipmentPlinkp.style.display = "flex";
-    }
+    updateEquipmentItem("legs", imageUrl, itemLink, equipmentLegs);
 }
 
 // Fetch helmet items
