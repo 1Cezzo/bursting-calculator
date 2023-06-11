@@ -46,33 +46,109 @@
     </div>
     
 
-    <table class="equipment equipment-right">
-    <tbody>
-        <tr>
-            <td>
-                <div class="equipment-div">
-                    <div id="equipment-head" class="equipment-head">
-                        <div class="equipment-plinkp" id="equipment-plinkp">
-                            <a id="helmet-link" th:title="${selectHelmetItem}">
-                                <img id="helmet-image" decoding="async" style="width: 100%;">
-                              </a>
-                        </div>
-                    </div>
-                    
-                    <div id="equipment-amulet" class="equipment-amulet">
-                        <div class="equipment-plinkp" id="equipment-plinkp">
-                            <a id="amulet-link" th:title="${selectAmuletItem}">
-                                <img id="amulet-image" decoding="async" style="width: 100%;">
-                              </a>
-                        </div>
-                    </div>
-    
-                    <!-- Add more table cells (td) and their contents here -->
+    <div class="dropdown">
+        <button onclick="toggleCapeDropdown()" class="dropbtn">
+            <span id="selected-cape-text">Cape</span>
+            <span class="arrow-icon"></span>
+        </button>
+        <div id="cape-dropdown-content" class="dropdown-content">
+            <input type="text" id="cape-search-input" placeholder="Search..." oninput="filterCapeItems()">
+            <a href="#" onclick="selectCapeItem('Cape', '')">Cape</a>
+            <div id="cape-item-list">
+                <!-- Dynamically populate the cape dropdown items using Thymeleaf -->
+                <div th:each="item : ${items}">
+                    <a href="#" th:text="${item.name}" th:data-name="${item.name}" th:data-image="${item.imageUrl}" onclick="selectCapeItem(this.getAttribute('data-name'), this.getAttribute('data-image'))"></a>
                 </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="dropdown">
+        <button onclick="toggleWeaponDropdown()" class="dropbtn">
+            <span id="selected-weapon-text">Weapon</span>
+            <span class="arrow-icon"></span>
+        </button>
+        <div id="weapon-dropdown-content" class="dropdown-content">
+            <input type="text" id="weapon-search-input" placeholder="Search..." oninput="filterWeaponItems()">
+            <a href="#" onclick="selectWeaponItem('Weapon', '')">Weapon</a>
+            <div id="weapon-item-list">
+                <!-- Dynamically populate the weapon dropdown items using Thymeleaf -->
+                <div th:each="item : ${items}">
+                    <a href="#" th:text="${item.name}" th:data-name="${item.name}" th:data-image="${item.imageUrl}" onclick="selectWeaponItem(this.getAttribute('data-name'), this.getAttribute('data-image'))"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="dropdown">
+        <button onclick="toggleTorsoDropdown()" class="dropbtn">
+            <span id="selected-torso-text">Torso</span>
+            <span class="arrow-icon"></span>
+        </button>
+        <div id="torso-dropdown-content" class="dropdown-content">
+            <input type="text" id="torso-search-input" placeholder="Search..." oninput="filterTorsoItems()">
+            <a href="#" onclick="selectTorsoItem('Torso', '')">Torso</a>
+            <div id="torso-item-list">
+                <!-- Dynamically populate the torso dropdown items using Thymeleaf -->
+                <div th:each="item : ${items}">
+                    <a href="#" th:text="${item.name}" th:data-name="${item.name}" th:data-image="${item.imageUrl}" onclick="selectTorsoItem(this.getAttribute('data-name'), this.getAttribute('data-image'))"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <table class="equipment equipment-right">
+        <tbody>
+            <tr>
+                <td>
+                    <div class="equipment-div">
+                        <div id="equipment-head" class="equipment-head">
+                            <div class="equipment-plinkp" id="equipment-plinkp-helmet">
+                                <a id="helmet-link" th:title="${selectHelmetItem}">
+                                    <img id="helmet-image" decoding="async" style="width: 100%;">
+                                </a>
+                            </div>
+                        </div>
+    
+                        <div id="equipment-amulet" class="equipment-amulet">
+                            <div class="equipment-plinkp" id="equipment-plinkp-amulet">
+                                <a id="amulet-link" th:title="${selectAmuletItem}">
+                                    <img id="amulet-image" decoding="async" style="width: 100%;">
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div id="equipment-cape" class="equipment-cape">
+                            <div class="equipment-plinkp" id="equipment-plinkp-cape">
+                                <a id="cape-link" th:title="${selectCapeItem}">
+                                    <img id="cape-image" decoding="async" style="width: 100%;">
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div id="equipment-weapon" class="equipment-weapon">
+                            <div class="equipment-plinkp" id="equipment-plinkp-weapon">
+                                <a id="weapon-link" th:title="${selectWeaponItem}">
+                                    <img id="weapon-image" decoding="async" style="width: 100%;">
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div id="equipment-torso" class="equipment-torso">
+                            <div class="equipment-plinkp" id="equipment-plinkp-torso">
+                                <a id="torso-link" th:title="${selectTorsoItem}">
+                                    <img id="torso-image" decoding="async" style="width: 100%;">
+                                </a>
+                            </div>
+                        </div>
+    
+                        <!-- Add more equipment slots here -->
+    
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
     <!-- Add your JavaScript file link here -->
     <script src="script.js"></script>

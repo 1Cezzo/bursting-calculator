@@ -180,6 +180,21 @@ table {
   top: 39px;
 }
 
+.equipment-cape{
+  left: 29px;
+  top: 39px;
+}
+
+.equipment-weapon{
+  left: 14px;
+  top: 78px;
+}
+
+.equipment-torso{
+  left: 70px;
+  top: 78px;
+}
+
 .arrow-icon {
   display: inline-block;
   width: 0;

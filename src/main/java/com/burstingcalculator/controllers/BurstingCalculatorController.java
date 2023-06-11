@@ -71,6 +71,54 @@ public class BurstingCalculatorController {
         }
     }
 
+    @GetMapping("/api/capes")
+    public ResponseEntity<String> getCapes() {
+        ObjectMapper objectMapperCape = new ObjectMapper();
+        List<Item> listOfCapes = new ArrayList<>();
+        // Populate listOfAmulets with amulet items
+        listOfCapes.add(new Item("Saradomin cape", "/images/icons/capes/Saradomin_cape.png"));
+        // Add more amulet items as needed
+        
+        try {
+            String json = objectMapperCape.writeValueAsString(listOfCapes);
+            return ResponseEntity.ok(json);
+        } catch (JsonProcessingException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/api/weapons")
+    public ResponseEntity<String> getWeapons() {
+        ObjectMapper objectMapperWeapon = new ObjectMapper();
+        List<Item> listOfWeapons = new ArrayList<>();
+        // Populate listOfAmulets with amulet items
+        listOfWeapons.add(new Item("Staff of light", "/images/icons/weapons/Staff_of_light.png"));
+        // Add more amulet items as needed
+        
+        try {
+            String json = objectMapperWeapon.writeValueAsString(listOfWeapons);
+            return ResponseEntity.ok(json);
+        } catch (JsonProcessingException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/api/torsos")
+    public ResponseEntity<String> getTorsos() {
+        ObjectMapper objectMapperTorso = new ObjectMapper();
+        List<Item> listOfWeapons = new ArrayList<>();
+        // Populate listOfAmulets with amulet items
+        listOfWeapons.add(new Item("Ahrim's robetop", "/images/icons/torsos/Ahrim's_robetop.png"));
+        // Add more amulet items as needed
+        
+        try {
+            String json = objectMapperTorso.writeValueAsString(listOfWeapons);
+            return ResponseEntity.ok(json);
+        } catch (JsonProcessingException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    
     @PostMapping("/calculate")
     public ModelAndView calculate(@RequestParam("gearSetup") String gearSetup,
                                   @RequestParam("location") String location,
