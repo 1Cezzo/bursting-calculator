@@ -1,18 +1,3 @@
-window.onload = function() {
-    // Set initial selected item to "Helmet", "Amulet", "Cape", "Weapon", and "Torso"
-    selectedHelmetText.textContent = "Helmet";
-    selectedAmuletText.textContent = "Amulet";
-    selectedCapeText.textContent = "Cape";
-    selectedWeaponText.textContent = "Weapon";
-    selectedTorsoText.textContent = "Torso";
-
-    updateHelmetImage("");
-    updateAmuletImage("");
-    updateCapeImage("");
-    updateWeaponImage("");
-    updateTorsoImage("");
-};
-
 // Get the elements for the helmet dropdown
 var helmetDropdownContent = document.getElementById("helmet-dropdown-content");
 var helmetSearchInput = document.getElementById("helmet-search-input");
@@ -37,6 +22,16 @@ var selectedWeaponText = document.getElementById("selected-weapon-text");
 var torsoDropdownContent = document.getElementById("torso-dropdown-content");
 var torsoSearchInput = document.getElementById("torso-search-input");
 var selectedTorsoText = document.getElementById("selected-torso-text");
+
+// Get the elements for the shield dropdown
+var shieldDropdownContent = document.getElementById("shield-dropdown-content");
+var shieldSearchInput = document.getElementById("shield-search-input");
+var selectedShieldText = document.getElementById("selected-shield-text");
+
+// Get the elements for the legs dropdown
+var legsDropdownContent = document.getElementById("legs-dropdown-content");
+var legsSearchInput = document.getElementById("legs-search-input");
+var selectedLegsText = document.getElementById("selected-legs-text");
 
 // Function to toggle the helmet dropdown
 function toggleHelmetDropdown() {
@@ -173,6 +168,60 @@ function selectTorsoItem(itemText, imageUrl) {
     updateTorsoImage(imageUrl);
 }
 
+// Function to toggle the shield dropdown
+function toggleShieldDropdown() {
+    shieldDropdownContent.classList.toggle("show");
+}
+
+// Function to filter the shield items based on search input
+function filterShieldItems() {
+    var input = shieldSearchInput.value.toLowerCase();
+    var items = shieldDropdownContent.getElementsByTagName("a");
+
+    for (var i = 0; i < items.length; i++) {
+        var itemText = items[i].textContent.toLowerCase();
+        if (itemText.indexOf(input) > -1) {
+            items[i].style.display = "";
+        } else {
+            items[i].style.display = "none";
+        }
+    }
+}
+
+// Function to select a shield item
+function selectShieldItem(itemText, imageUrl) {
+    selectedShieldText.textContent = itemText;
+    toggleShieldDropdown();
+    updateShieldImage(imageUrl);
+}
+
+// Function to toggle the legs dropdown
+function toggleLegsDropdown() {
+    legsDropdownContent.classList.toggle("show");
+}
+
+// Function to filter the legs items based on search input
+function filterLegsItems() {
+    var input = legsSearchInput.value.toLowerCase();
+    var items = legsDropdownContent.getElementsByTagName("a");
+
+    for (var i = 0; i < items.length; i++) {
+        var itemText = items[i].textContent.toLowerCase();
+        if (itemText.indexOf(input) > -1) {
+            items[i].style.display = "";
+        } else {
+            items[i].style.display = "none";
+        }
+    }
+}
+
+// Function to select a legs item
+function selectLegsItem(itemText, imageUrl) {
+    selectedLegsText.textContent = itemText;
+    toggleLegsDropdown();
+    updateLegsImage(imageUrl);
+}
+
 function updateEquipmentItem(itemName, imageUrl, itemLink, equipmentElement) {
     var itemImage = document.getElementById(itemName + "-image");
     var itemLinkElement = document.getElementById(itemName + "-link");
@@ -185,7 +234,9 @@ function updateEquipmentItem(itemName, imageUrl, itemLink, equipmentElement) {
         itemName === "amulet" && selectedAmuletText.textContent === "Amulet" ||
         itemName === "cape" && selectedCapeText.textContent === "Cape" ||
         itemName === "weapon" && selectedWeaponText.textContent === "Weapon" ||
-        itemName === "torso" && selectedTorsoText.textContent === "Torso"
+        itemName === "torso" && selectedTorsoText.textContent === "Torso" ||
+        itemName === "shield" && selectedShieldText.textContent === "Shield" ||
+        itemName === "legs" && selectedLegsText.textContent === "Legs"
     ) {
         equipmentElement.classList.remove("equipment-blank");
     } else {
@@ -205,7 +256,9 @@ function updateHelmetImage(imageUrl) {
         selectedAmuletText.textContent === "Amulet" &&
         selectedCapeText.textContent === "Cape" &&
         selectedWeaponText.textContent === "Weapon" &&
-        selectedTorsoText.textContent === "Torso"
+        selectedTorsoText.textContent === "Torso" &&
+        selectedShieldText.textContent === "Shield" && 
+        selectedLegsText.textContent === "Legs"
     ) {
         equipmentPlinkp.style.display = "none";
     } else {
@@ -225,7 +278,9 @@ function updateAmuletImage(imageUrl) {
         selectedAmuletText.textContent === "Amulet" &&
         selectedCapeText.textContent === "Cape" &&
         selectedWeaponText.textContent === "Weapon" &&
-        selectedTorsoText.textContent === "Torso"
+        selectedTorsoText.textContent === "Torso" &&
+        selectedShieldText.textContent === "Shield" &&
+        selectedLegsText.textContent === "Legs"
     ) {
         equipmentPlinkp.style.display = "none";
     } else {
@@ -245,7 +300,9 @@ function updateCapeImage(imageUrl) {
         selectedAmuletText.textContent === "Amulet" &&
         selectedCapeText.textContent === "Cape" &&
         selectedWeaponText.textContent === "Weapon" &&
-        selectedTorsoText.textContent === "Torso"
+        selectedTorsoText.textContent === "Torso" &&
+        selectedShieldText.textContent === "Shield" && 
+        selectedLegsText.textContent === "Legs"
     ) {
         equipmentPlinkp.style.display = "none";
     } else {
@@ -265,7 +322,9 @@ function updateWeaponImage(imageUrl) {
         selectedAmuletText.textContent === "Amulet" &&
         selectedCapeText.textContent === "Cape" &&
         selectedWeaponText.textContent === "Weapon" &&
-        selectedTorsoText.textContent === "Torso"
+        selectedTorsoText.textContent === "Torso" &&
+        selectedShieldText.textContent === "Shield" &&
+        selectedLegsText.textContent === "Legs"
     ) {
         equipmentPlinkp.style.display = "none";
     } else {
@@ -285,10 +344,58 @@ function updateTorsoImage(imageUrl) {
         selectedAmuletText.textContent === "Amulet" &&
         selectedCapeText.textContent === "Cape" &&
         selectedWeaponText.textContent === "Weapon" &&
-        selectedTorsoText.textContent === "Torso"
+        selectedTorsoText.textContent === "Torso" &&
+        selectedShieldText.textContent === "Shield" &&
+        selectedLegsText.textContent === "Legs"
     ) {
         equipmentPlinkp.style.display = "none";
     } else {
+        equipmentPlinkp.style.display = "flex";
+    }
+}
+
+function updateShieldImage(imageUrl) {
+    var equipmentShield = document.getElementById("equipment-shield");
+    var equipmentPlinkp = document.getElementById("equipment-plinkp-shield");
+
+    var itemLink = "https://oldschool.runescape.wiki/w/" + selectedShieldText.textContent.replace(/\s+/g, "_");
+    updateEquipmentItem("shield", imageUrl, itemLink, equipmentShield);
+
+    if (
+        selectedHelmetText.textContent === "Helmet" &&
+        selectedAmuletText.textContent === "Amulet" &&
+        selectedCapeText.textContent === "Cape" &&
+        selectedWeaponText.textContent === "Weapon" &&
+        selectedTorsoText.textContent === "Torso" &&
+        selectedShieldText.textContent === "Shield" && 
+        selectedLegsText.textContent === "Legs"
+    ) {
+        equipmentPlinkp.style.display = "none";
+    }
+    else {
+        equipmentPlinkp.style.display = "flex";
+    }
+}
+
+function updateLegsImage(imageUrl) {
+    var equipmentLegs = document.getElementById("equipment-legs");
+    var equipmentPlinkp = document.getElementById("equipment-plinkp-legs");
+
+    var itemLink = "https://oldschool.runescape.wiki/w/" + selectedLegsText.textContent.replace(/\s+/g, "_");
+    updateEquipmentItem("legs", imageUrl, itemLink, equipmentLegs);
+
+    if (
+        selectedHelmetText.textContent === "Helmet" &&
+        selectedAmuletText.textContent === "Amulet" &&
+        selectedCapeText.textContent === "Cape" &&
+        selectedWeaponText.textContent === "Weapon" &&
+        selectedTorsoText.textContent === "Torso" &&
+        selectedShieldText.textContent === "Shield" &&
+        selectedLegsText.textContent === "Legs"
+    ) {
+        equipmentPlinkp.style.display = "none";
+    }
+    else {
         equipmentPlinkp.style.display = "flex";
     }
 }
@@ -422,3 +529,59 @@ fetch('/api/torsos')
 .catch(error => {
     console.error('Error retrieving torso items:', error);
 });
+
+// Fetch amulet items
+fetch('/api/shields')
+.then(response => response.json())
+.then(items => {
+    console.log('Shield items retrieved:', items);
+
+    const itemList = document.getElementById('shield-item-list');
+    itemList.innerHTML = ''; // Clear the existing amulet dropdown items
+
+    items.forEach(item => {
+    const link = document.createElement('a');
+    link.href = '#';
+    link.textContent = item.name;
+    link.onclick = () => selectShieldItem(item.name, item.imageUrl);
+
+    const itemDiv = document.createElement('div');
+    itemDiv.appendChild(link);
+    itemList.appendChild(itemDiv);
+    });
+
+    console.log('Shield dropdown menu populated:', items);
+}
+)
+.catch(error => {
+    console.error('Error retrieving shield items:', error);
+}
+);
+
+// Fetch amulet items
+fetch('/api/legs')
+.then(response => response.json())
+.then(items => {
+    console.log('Leg items retrieved:', items);
+
+    const itemList = document.getElementById('legs-item-list');
+    itemList.innerHTML = ''; // Clear the existing amulet dropdown items
+
+    items.forEach(item => {
+    const link = document.createElement('a');
+    link.href = '#';
+    link.textContent = item.name;
+    link.onclick = () => selectLegsItem(item.name, item.imageUrl);
+
+    const itemDiv = document.createElement('div');
+    itemDiv.appendChild(link);
+    itemList.appendChild(itemDiv);
+    });
+
+    console.log('Legs dropdown menu populated:', items);
+}  
+)
+.catch(error => {
+    console.error('Error retrieving legs items:', error);
+}
+);

@@ -119,6 +119,38 @@ public class BurstingCalculatorController {
         }
     }
     
+    @GetMapping("/api/shields")
+    public ResponseEntity<String> getShields() {
+        ObjectMapper objectMapperShield = new ObjectMapper();
+        List<Item> listOfShields = new ArrayList<>();
+        // Populate listOfAmulets with amulet items
+        listOfShields.add(new Item("Book of darkness", "/images/icons/shields/Book_of_darkness.png"));
+        // Add more amulet items as needed
+        
+        try {
+            String json = objectMapperShield.writeValueAsString(listOfShields);
+            return ResponseEntity.ok(json);
+        } catch (JsonProcessingException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/api/legs")
+    public ResponseEntity<String> getLegs() {
+        ObjectMapper objectMapperLeg = new ObjectMapper();
+        List<Item> listOfLegs = new ArrayList<>();
+        // Populate listOfAmulets with amulet items
+        listOfLegs.add(new Item("Ahrim's robeskirt", "/images/icons/legs/Ahrim's_robeskirt.png"));
+        // Add more amulet items as needed
+        
+        try {
+            String json = objectMapperLeg.writeValueAsString(listOfLegs);
+            return ResponseEntity.ok(json);
+        } catch (JsonProcessingException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
     @PostMapping("/calculate")
     public ModelAndView calculate(@RequestParam("gearSetup") String gearSetup,
                                   @RequestParam("location") String location,
