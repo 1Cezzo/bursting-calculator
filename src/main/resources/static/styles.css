@@ -102,6 +102,12 @@ h1 {
   display: block;
 }
 
+input[id$="-search-input"] {
+  /* Styles for all search inputs with IDs ending in "-search-input" */
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .equipment {
   background: #3e3529;
   border: 9px solid transparent;
