@@ -652,3 +652,17 @@ fetch('/api/rings')
     console.log('Ring dropdown menu populated:', items);
 } ).catch(error => {
     console.error('Error retrieving ring items:', error);});
+
+document.addEventListener('mousedown', function(event) {
+    var target = event.target;
+    var dropdownContents = document.getElementsByClassName('dropdown-content');
+    
+    for (var i = 0; i < dropdownContents.length; i++) {
+        var dropdownContent = dropdownContents[i];
+        var dropdownToggle = dropdownContent.previousElementSibling;
+        
+        if (!dropdownContent.contains(target) && target !== dropdownToggle) {
+            dropdownContent.classList.remove('show');
+        }
+    }
+});

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -105,7 +106,8 @@ public class BurstingCalculatorController {
                 }
             }
         }
-
+        Collections.sort(listOfAmulets, (item1, item2) -> item1.getName().compareToIgnoreCase(item2.getName()));
+        
         try {
             String json = objectMapperAmulet.writeValueAsString(listOfAmulets);
             return ResponseEntity.ok(json);
@@ -143,6 +145,7 @@ public class BurstingCalculatorController {
                 }
             }
         }
+        Collections.sort(listOfCapes, (item1, item2) -> item1.getName().compareToIgnoreCase(item2.getName()));
 
         try {
             String json = objectMapperCape.writeValueAsString(listOfCapes);
@@ -181,6 +184,7 @@ public class BurstingCalculatorController {
                 }
             }
         }
+        Collections.sort(listOfWeapons, (item1, item2) -> item1.getName().compareToIgnoreCase(item2.getName()));
 
         try {
             String json = objectMapperWeapon.writeValueAsString(listOfWeapons);
@@ -219,6 +223,7 @@ public class BurstingCalculatorController {
                 }
             }
         }
+        Collections.sort(listOfWeapons, (item1, item2) -> item1.getName().compareToIgnoreCase(item2.getName()));
 
         try {
             String json = objectMapperTorso.writeValueAsString(listOfWeapons);
@@ -257,6 +262,7 @@ public class BurstingCalculatorController {
                 }
             }
         }
+        Collections.sort(listOfShields, (item1, item2) -> item1.getName().compareToIgnoreCase(item2.getName()));
 
         try {
             String json = objectMapperShield.writeValueAsString(listOfShields);
@@ -295,6 +301,7 @@ public class BurstingCalculatorController {
                 }
             }
         }
+        Collections.sort(listOfLegs, (item1, item2) -> item1.getName().compareToIgnoreCase(item2.getName()));
 
         try {
             String json = objectMapperLeg.writeValueAsString(listOfLegs);
@@ -333,6 +340,7 @@ public class BurstingCalculatorController {
                 }
             }
         }
+        Collections.sort(listOfGloves, (item1, item2) -> item1.getName().compareToIgnoreCase(item2.getName()));
 
         try {
             String json = objectMapperGlove.writeValueAsString(listOfGloves);
@@ -371,6 +379,7 @@ public class BurstingCalculatorController {
                 }
             }
         }
+        Collections.sort(listOfBoots, (item1, item2) -> item1.getName().compareToIgnoreCase(item2.getName()));
 
         try {
             String json = objectMapperBoot.writeValueAsString(listOfBoots);
@@ -410,6 +419,7 @@ public class BurstingCalculatorController {
                 }
             }
         }
+        Collections.sort(listOfRings, (item1, item2) -> item1.getName().compareToIgnoreCase(item2.getName()));
 
         try {
             String json = objectMapperRing.writeValueAsString(listOfRings);
