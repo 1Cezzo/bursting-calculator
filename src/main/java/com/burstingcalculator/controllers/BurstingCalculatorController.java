@@ -4,6 +4,7 @@ import com.burstingcalculator.model.Item;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,11 +42,31 @@ public class BurstingCalculatorController {
     public ResponseEntity<String> getHelmets() {
         ObjectMapper objectMapperHelmet = new ObjectMapper();
         List<Item> listOfHelmets = new ArrayList<>();
-        // Populate listOfHelmets with helmet items
-        listOfHelmets.add(new Item("Ancestral hat", "/images/icons/helmets/Ancestral_hat.png"));
-        listOfHelmets.add(new Item("Ahrim's hood", "/images/icons/helmets/Ahrim's_hood.png"));
-        listOfHelmets.add(new Item("Dagon'hai hat", "/images/icons/helmets/Dagon'hai_hat.png"));
-        // Add more helmet items as needed
+        
+        // Obtain the path to the icons/helmets folder
+        String helmetsFolderPath = "src/main/resources/static/images/icons/helmets";
+
+        // Create a File object representing the helmets folder
+        File helmetsFolder = new File(helmetsFolderPath);
+
+        // Check if the folder exists and is a directory
+        if (helmetsFolder.exists() && helmetsFolder.isDirectory()) {
+            // Get the list of files in the helmets folder
+            File[] helmetFiles = helmetsFolder.listFiles();
+
+            if (helmetFiles != null) {
+                for (File helmetFile : helmetFiles) {
+                    // Extract the helmet name from the file name and replace underscores with spaces
+                    String helmetName = helmetFile.getName().replace(".png", "").replace("_", " ");
+
+                    // Construct the image URL using the base URL and relative path
+                    String helmetImageUrl = "/images/icons/helmets/" + helmetFile.getName();
+
+                    // Create a new Item object and add it to the list
+                    listOfHelmets.add(new Item(helmetName, helmetImageUrl));
+                }
+            }
+        }
 
         try {
             String json = objectMapperHelmet.writeValueAsString(listOfHelmets);
@@ -59,10 +80,32 @@ public class BurstingCalculatorController {
     public ResponseEntity<String> getAmulets() {
         ObjectMapper objectMapperAmulet = new ObjectMapper();
         List<Item> listOfAmulets = new ArrayList<>();
-        // Populate listOfAmulets with amulet items
-        listOfAmulets.add(new Item("Occult necklace", "/images/icons/amulets/Occult_necklace.png"));
-        // Add more amulet items as needed
         
+        // Obtain the path to the icons/amulets folder
+        String amuletsFolderPath = "src/main/resources/static/images/icons/amulets";
+
+        // Create a File object representing the amulets folder
+        File amuletsFolder = new File(amuletsFolderPath);
+
+        // Check if the folder exists and is a directory
+        if (amuletsFolder.exists() && amuletsFolder.isDirectory()) {
+            // Get the list of files in the amulets folder
+            File[] amuletFiles = amuletsFolder.listFiles();
+
+            if (amuletFiles != null) {
+                for (File amuletFile : amuletFiles) {
+                    // Extract the amulet name from the file name and replace underscores with spaces
+                    String amuletName = amuletFile.getName().replace(".png", "").replace("_", " ");
+
+                    // Construct the image URL using the base URL and relative path
+                    String amuletImageUrl = "/images/icons/amulets/" + amuletFile.getName();
+
+                    // Create a new Item object and add it to the list
+                    listOfAmulets.add(new Item(amuletName, amuletImageUrl));
+                }
+            }
+        }
+
         try {
             String json = objectMapperAmulet.writeValueAsString(listOfAmulets);
             return ResponseEntity.ok(json);
@@ -75,10 +118,32 @@ public class BurstingCalculatorController {
     public ResponseEntity<String> getCapes() {
         ObjectMapper objectMapperCape = new ObjectMapper();
         List<Item> listOfCapes = new ArrayList<>();
-        // Populate listOfAmulets with amulet items
-        listOfCapes.add(new Item("Saradomin cape", "/images/icons/capes/Saradomin_cape.png"));
-        // Add more amulet items as needed
         
+        // Obtain the path to the icons/capes folder
+        String capesFolderPath = "src/main/resources/static/images/icons/capes";
+
+        // Create a File object representing the capes folder
+        File capesFolder = new File(capesFolderPath);
+
+        // Check if the folder exists and is a directory
+        if (capesFolder.exists() && capesFolder.isDirectory()) {
+            // Get the list of files in the capes folder
+            File[] capeFiles = capesFolder.listFiles();
+
+            if (capeFiles != null) {
+                for (File capeFile : capeFiles) {
+                    // Extract the cape name from the file name and replace underscores with spaces
+                    String capeName = capeFile.getName().replace(".png", "").replace("_", " ");
+
+                    // Construct the image URL using the base URL and relative path
+                    String capeImageUrl = "/images/icons/capes/" + capeFile.getName();
+
+                    // Create a new Item object and add it to the list
+                    listOfCapes.add(new Item(capeName, capeImageUrl));
+                }
+            }
+        }
+
         try {
             String json = objectMapperCape.writeValueAsString(listOfCapes);
             return ResponseEntity.ok(json);
@@ -91,10 +156,32 @@ public class BurstingCalculatorController {
     public ResponseEntity<String> getWeapons() {
         ObjectMapper objectMapperWeapon = new ObjectMapper();
         List<Item> listOfWeapons = new ArrayList<>();
-        // Populate listOfAmulets with amulet items
-        listOfWeapons.add(new Item("Staff of light", "/images/icons/weapons/Staff_of_light.png"));
-        // Add more amulet items as needed
-        
+       
+        // Obtain the path to the icons/weapons folder
+        String weaponsFolderPath = "src/main/resources/static/images/icons/weapons";
+
+        // Create a File object representing the weapons folder
+        File weaponsFolder = new File(weaponsFolderPath);
+
+        // Check if the folder exists and is a directory
+        if (weaponsFolder.exists() && weaponsFolder.isDirectory()) {
+            // Get the list of files in the weapons folder
+            File[] weaponFiles = weaponsFolder.listFiles();
+
+            if (weaponFiles != null) {
+                for (File weaponFile : weaponFiles) {
+                    // Extract the weapon name from the file name and replace underscores with spaces
+                    String weaponName = weaponFile.getName().replace(".png", "").replace("_", " ");
+
+                    // Construct the image URL using the base URL and relative path
+                    String weaponImageUrl = "/images/icons/weapons/" + weaponFile.getName();
+
+                    // Create a new Item object and add it to the list
+                    listOfWeapons.add(new Item(weaponName, weaponImageUrl));
+                }
+            }
+        }
+
         try {
             String json = objectMapperWeapon.writeValueAsString(listOfWeapons);
             return ResponseEntity.ok(json);
@@ -107,10 +194,32 @@ public class BurstingCalculatorController {
     public ResponseEntity<String> getTorsos() {
         ObjectMapper objectMapperTorso = new ObjectMapper();
         List<Item> listOfWeapons = new ArrayList<>();
-        // Populate listOfAmulets with amulet items
-        listOfWeapons.add(new Item("Ahrim's robetop", "/images/icons/torsos/Ahrim's_robetop.png"));
-        // Add more amulet items as needed
         
+        // Obtain the path to the icons/torsos folder
+        String torsosFolderPath = "src/main/resources/static/images/icons/torsos";
+
+        // Create a File object representing the torsos folder
+        File torsosFolder = new File(torsosFolderPath);
+
+        // Check if the folder exists and is a directory
+        if (torsosFolder.exists() && torsosFolder.isDirectory()) {
+            // Get the list of files in the torsos folder
+            File[] torsoFiles = torsosFolder.listFiles();
+
+            if (torsoFiles != null) {
+                for (File torsoFile : torsoFiles) {
+                    // Extract the torso name from the file name and replace underscores with spaces
+                    String torsoName = torsoFile.getName().replace(".png", "").replace("_", " ");
+
+                    // Construct the image URL using the base URL and relative path
+                    String torsoImageUrl = "/images/icons/torsos/" + torsoFile.getName();
+
+                    // Create a new Item object and add it to the list
+                    listOfWeapons.add(new Item(torsoName, torsoImageUrl));
+                }
+            }
+        }
+
         try {
             String json = objectMapperTorso.writeValueAsString(listOfWeapons);
             return ResponseEntity.ok(json);
@@ -123,10 +232,32 @@ public class BurstingCalculatorController {
     public ResponseEntity<String> getShields() {
         ObjectMapper objectMapperShield = new ObjectMapper();
         List<Item> listOfShields = new ArrayList<>();
-        // Populate listOfAmulets with amulet items
-        listOfShields.add(new Item("Book of darkness", "/images/icons/shields/Book_of_darkness.png"));
-        // Add more amulet items as needed
         
+        // Obtain the path to the icons/shields folder
+        String shieldsFolderPath = "src/main/resources/static/images/icons/shields";
+
+        // Create a File object representing the shields folder
+        File shieldsFolder = new File(shieldsFolderPath);
+
+        // Check if the folder exists and is a directory
+        if (shieldsFolder.exists() && shieldsFolder.isDirectory()) {
+            // Get the list of files in the shields folder
+            File[] shieldFiles = shieldsFolder.listFiles();
+
+            if (shieldFiles != null) {
+                for (File shieldFile : shieldFiles) {
+                    // Extract the shield name from the file name and replace underscores with spaces
+                    String shieldName = shieldFile.getName().replace(".png", "").replace("_", " ");
+
+                    // Construct the image URL using the base URL and relative path
+                    String shieldImageUrl = "/images/icons/shields/" + shieldFile.getName();
+
+                    // Create a new Item object and add it to the list
+                    listOfShields.add(new Item(shieldName, shieldImageUrl));
+                }
+            }
+        }
+
         try {
             String json = objectMapperShield.writeValueAsString(listOfShields);
             return ResponseEntity.ok(json);
@@ -139,10 +270,32 @@ public class BurstingCalculatorController {
     public ResponseEntity<String> getLegs() {
         ObjectMapper objectMapperLeg = new ObjectMapper();
         List<Item> listOfLegs = new ArrayList<>();
-        // Populate listOfAmulets with amulet items
-        listOfLegs.add(new Item("Ahrim's robeskirt", "/images/icons/legs/Ahrim's_robeskirt.png"));
-        // Add more amulet items as needed
         
+        // Obtain the path to the icons/legs folder
+        String legsFolderPath = "src/main/resources/static/images/icons/legs";
+
+        // Create a File object representing the legs folder
+        File legsFolder = new File(legsFolderPath);
+
+        // Check if the folder exists and is a directory
+        if (legsFolder.exists() && legsFolder.isDirectory()) {
+            // Get the list of files in the legs folder
+            File[] legFiles = legsFolder.listFiles();
+
+            if (legFiles != null) {
+                for (File legFile : legFiles) {
+                    // Extract the leg name from the file name and replace underscores with spaces
+                    String legName = legFile.getName().replace(".png", "").replace("_", " ");
+
+                    // Construct the image URL using the base URL and relative path
+                    String legImageUrl = "/images/icons/legs/" + legFile.getName();
+
+                    // Create a new Item object and add it to the list
+                    listOfLegs.add(new Item(legName, legImageUrl));
+                }
+            }
+        }
+
         try {
             String json = objectMapperLeg.writeValueAsString(listOfLegs);
             return ResponseEntity.ok(json);
@@ -155,10 +308,32 @@ public class BurstingCalculatorController {
     public ResponseEntity<String> getGloves() {
         ObjectMapper objectMapperGlove = new ObjectMapper();
         List<Item> listOfGloves = new ArrayList<>();
-        // Populate listOfAmulets with amulet items
-        listOfGloves.add(new Item("Tormented bracelet", "/images/icons/gloves/Tormented_bracelet.png"));
-        // Add more amulet items as needed
         
+        // Obtain the path to the icons/gloves folder
+        String glovesFolderPath = "src/main/resources/static/images/icons/gloves";
+
+        // Create a File object representing the gloves folder
+        File glovesFolder = new File(glovesFolderPath);
+
+        // Check if the folder exists and is a directory
+        if (glovesFolder.exists() && glovesFolder.isDirectory()) {
+            // Get the list of files in the gloves folder
+            File[] gloveFiles = glovesFolder.listFiles();
+
+            if (gloveFiles != null) {
+                for (File gloveFile : gloveFiles) {
+                    // Extract the glove name from the file name and replace underscores with spaces
+                    String gloveName = gloveFile.getName().replace(".png", "").replace("_", " ");
+
+                    // Construct the image URL using the base URL and relative path
+                    String gloveImageUrl = "/images/icons/gloves/" + gloveFile.getName();
+
+                    // Create a new Item object and add it to the list
+                    listOfGloves.add(new Item(gloveName, gloveImageUrl));
+                }
+            }
+        }
+
         try {
             String json = objectMapperGlove.writeValueAsString(listOfGloves);
             return ResponseEntity.ok(json);
@@ -171,10 +346,32 @@ public class BurstingCalculatorController {
     public ResponseEntity<String> getBoots() {
         ObjectMapper objectMapperBoot = new ObjectMapper();
         List<Item> listOfBoots = new ArrayList<>();
-        // Populate listOfAmulets with amulet items
-        listOfBoots.add(new Item("Eternal boots", "/images/icons/boots/Eternal_boots.png"));
-        // Add more amulet items as needed
-        
+
+        // Obtain the path to the icons/boots folder
+        String bootsFolderPath = "src/main/resources/static/images/icons/boots";
+
+        // Create a File object representing the boots folder
+        File bootsFolder = new File(bootsFolderPath);
+
+        // Check if the folder exists and is a directory
+        if (bootsFolder.exists() && bootsFolder.isDirectory()) {
+            // Get the list of files in the boots folder
+            File[] bootFiles = bootsFolder.listFiles();
+
+            if (bootFiles != null) {
+                for (File bootFile : bootFiles) {
+                    // Extract the boot name from the file name and replace underscores with spaces
+                    String bootName = bootFile.getName().replace(".png", "").replace("_", " ");
+
+                    // Construct the image URL using the base URL and relative path
+                    String imageUrl = "/images/icons/boots/" + bootFile.getName();
+
+                    // Create the item object and add it to the list
+                    listOfBoots.add(new Item(bootName, imageUrl));
+                }
+            }
+        }
+
         try {
             String json = objectMapperBoot.writeValueAsString(listOfBoots);
             return ResponseEntity.ok(json);
@@ -183,14 +380,37 @@ public class BurstingCalculatorController {
         }
     }
 
+
     @GetMapping("/api/rings")
     public ResponseEntity<String> getRings() {
         ObjectMapper objectMapperRing = new ObjectMapper();
         List<Item> listOfRings = new ArrayList<>();
-        // Populate listOfAmulets with amulet items
-        listOfRings.add(new Item("Seers' ring (i)", "/images/icons/rings/Seers_ring_(i).png"));
-        // Add more amulet items as needed
-        
+
+        // Obtain the path to the icons/rings folder
+        String ringsFolderPath = "src/main/resources/static/images/icons/rings";
+
+        // Create a File object representing the rings folder
+        File ringsFolder = new File(ringsFolderPath);
+
+        // Check if the folder exists and is a directory
+        if (ringsFolder.exists() && ringsFolder.isDirectory()) {
+            // Get the list of files in the rings folder
+            File[] ringFiles = ringsFolder.listFiles();
+
+            if (ringFiles != null) {
+                for (File ringFile : ringFiles) {
+                    // Extract the ring name from the file name and replace underscores with spaces
+                    String ringName = ringFile.getName().replace(".png", "").replace("_", " ");
+
+                    // Construct the image URL using the base URL and relative path
+                    String imageUrl = "/images/icons/rings/" + ringFile.getName();
+
+                    // Create the item object and add it to the list
+                    listOfRings.add(new Item(ringName, imageUrl));
+                }
+            }
+        }
+
         try {
             String json = objectMapperRing.writeValueAsString(listOfRings);
             return ResponseEntity.ok(json);
