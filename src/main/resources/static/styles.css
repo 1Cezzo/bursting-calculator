@@ -205,6 +205,26 @@ table {
   top: 118px;
 }
 
+.equipment-gloves{
+  left: 14px;
+  top: 158px;
+}
+
+.equipment-boots{
+  left: 70px;
+  top: 158px;
+}
+
+.equipment-ring{
+  left: 126px;
+  top: 158px;
+}
+
+img {
+  border: 0;
+  vertical-align: middle;
+}
+
 .arrow-icon {
   display: inline-block;
   width: 0;

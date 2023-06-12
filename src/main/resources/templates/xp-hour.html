@@ -27,7 +27,6 @@
             </div>
         </div>
     </div>
-    
     <div class="dropdown">
         <button onclick="toggleAmuletDropdown()" class="dropbtn">
             <span id="selected-amulet-text">Amulet</span>
@@ -44,8 +43,6 @@
             </div>
         </div>
     </div>
-    
-
     <div class="dropdown">
         <button onclick="toggleCapeDropdown()" class="dropbtn">
             <span id="selected-cape-text">Cape</span>
@@ -62,7 +59,6 @@
             </div>
         </div>
     </div>
-    
     <div class="dropdown">
         <button onclick="toggleWeaponDropdown()" class="dropbtn">
             <span id="selected-weapon-text">Weapon</span>
@@ -79,7 +75,6 @@
             </div>
         </div>
     </div>
-    
     <div class="dropdown">
         <button onclick="toggleTorsoDropdown()" class="dropbtn">
             <span id="selected-torso-text">Torso</span>
@@ -96,7 +91,6 @@
             </div>
         </div>
     </div>
-    
     <div class="dropdown">
         <button onclick="toggleShieldDropdown()" class="dropbtn">
             <span id="selected-shield-text">Shield</span>
@@ -113,7 +107,6 @@
             </div>
         </div>
     </div>
-    
     <div class="dropdown">
         <button onclick="toggleLegsDropdown()" class="dropbtn">
             <span id="selected-legs-text">Legs</span>
@@ -130,7 +123,54 @@
             </div>
         </div>
     </div>
-    
+    <div class="dropdown">
+        <button onclick="toggleGlovesDropdown()" class="dropbtn">
+            <span id="selected-gloves-text">Gloves</span>
+            <span class="arrow-icon"></span>
+        </button>
+        <div id="gloves-dropdown-content" class="dropdown-content">
+            <input type="text" id="gloves-search-input" placeholder="Search..." oninput="filterGlovesItems()">
+            <a href="#" onclick="selectGlovesItem('Gloves', '')">Legs</a>
+            <div id="gloves-item-list">
+                <!-- Dynamically populate the legs dropdown items using Thymeleaf -->
+                <div th:each="item : ${items}">
+                    <a href="#" th:text="${item.name}" th:data-name="${item.name}" th:data-image="${item.imageUrl}" onclick="selectGlovesItem(this.getAttribute('data-name'), this.getAttribute('data-image'))"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dropdown">
+        <button onclick="toggleBootsDropdown()" class="dropbtn">
+            <span id="selected-boots-text">Boots</span>
+            <span class="arrow-icon"></span>
+        </button>
+        <div id="boots-dropdown-content" class="dropdown-content">
+            <input type="text" id="boots-search-input" placeholder="Search..." oninput="filterBootsItems()">
+            <a href="#" onclick="selectBootsItem('Boots', '')">Boots</a>
+            <div id="boots-item-list">
+                <!-- Dynamically populate the boots dropdown items using Thymeleaf -->
+                <div th:each="item : ${items}">
+                    <a href="#" th:text="${item.name}" th:data-name="${item.name}" th:data-image="${item.imageUrl}" onclick="selectBootsItem(this.getAttribute('data-name'), this.getAttribute('data-image'))"></a>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <div class="dropdown">
+        <button onclick="toggleRingDropdown()" class="dropbtn">
+            <span id="selected-ring-text">Ring</span>
+            <span class="arrow-icon"></span>
+        </button>
+        <div id="ring-dropdown-content" class="dropdown-content">
+            <input type="text" id="ring-search-input" placeholder="Search..." oninput="filterRingItems()">
+            <a href="#" onclick="selectRingItem('Ring', '')">Ring</a>
+            <div id="ring-item-list">
+                <!-- Dynamically populate the ring dropdown items using Thymeleaf -->
+                <div th:each="item : ${items}">
+                    <a href="#" th:text="${item.name}" th:data-name="${item.name}" th:data-image="${item.imageUrl}" onclick="selectRingItem(this.getAttribute('data-name'), this.getAttribute('data-image'))"></a>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <table class="equipment equipment-right">
         <tbody>
@@ -192,8 +232,30 @@
                                 </a>
                             </div>
                         </div>
-                        <!-- Add more equipment slots here -->
+
+                        <div id="equipment-gloves" class="equipment-gloves">
+                            <div class="equipment-plinkp" id="equipment-plinkp-gloves">
+                                <a id="gloves-link" th:title="${selectGlovesItem}">
+                                    <img id="gloves-image" decoding="async" style="width: 100%;">
+                                </a>
+                            </div>
+                        </div>
     
+                        <div id="equipment-boots" class="equipment-boots">
+                            <div class="equipment-plinkp" id="equipment-plinkp-boots">
+                                <a id="boots-link" th:title="${selectBootsItem}">
+                                    <img id="boots-image" decoding="async" style="width: 100%;">
+                                </a>
+                            </div>
+                        </div>
+
+                        <div id="equipment-ring" class="equipment-ring">
+                            <div class="equipment-plinkp" id="equipment-plinkp-ring">
+                                <a id="ring-link" th:title="${selectRingItem}">
+                                    <img id="ring-image" decoding="async" style="width: 100%;">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </td>
             </tr>
