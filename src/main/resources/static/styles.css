@@ -127,21 +127,13 @@ h1 {
 }
 
 #magic-level-label {
-  display: none;
+  display: block;
   background-color: #007bff;
   color: white;
   padding: 10px;
   border-radius: 4px;
-  margin-right: 10px;
+  margin: 10px;
   max-width: fit-content;
-}
-
-#magic-level-input:focus + #magic-level-label {
-  display: block;
-}
-
-#magic-level-label.show {
-  display: block;
 }
 
 
@@ -293,9 +285,45 @@ img {
 }
 
 .spellbook-icon {
-  max-width: 30px;
-  height: auto;
+  display: inline-block;
+  width: 24px;
+  height: 23px;
   background-image: url('../images/icons/spells/Ancient_spellbook.png');
   background-size: cover;
   cursor: pointer;
+  vertical-align: middle;
+}
+
+.spell-image {
+  width: 25px; /* Adjust the size of the spell image */
+  height: auto;
+  object-fit: cover;
+  margin: 5px; /* Adjust the margin as needed */
+}
+
+.spell-image.disabled {
+  filter: grayscale(100%);
+}
+
+.spell-grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 5px;
+  border-image: url("../images/backgrounds/interface_border.png");
+  border-image-slice: 9;
+  border-image-width: 9px;
+  border-image-outset: 0;
+  border-image-repeat: repeat;
+  background-image: url("../images/backgrounds/background_color.png");
+  background-repeat: cover;
+  padding: 10px;
+}
+
+.spellbook-dropdown-content {
+  display: none;
+}
+
+#selected-spell-text {
+  margin-right: 5px;
 }

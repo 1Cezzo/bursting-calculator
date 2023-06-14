@@ -831,15 +831,92 @@ function updateMonsterLabel() {
 
     // Call the function to update the monster label initially
     updateMonsterLabel();
+
+  var spellDropdown = document.querySelector(".spellbook-dropdown-content");
+
+  function toggleSpellDropdown() {
+    var dropdownContent = document.querySelector(".spellbook-dropdown-content");
+    var selectedSpellText = document.getElementById("selected-spell-text");
+    
+    // Clear the existing content
+    dropdownContent.innerHTML = "";
+    
+    // Define the list of spell options (image URLs)
+    var spellOptions = [
+      "../images/icons/spells/Smoke_burst.png",
+      "../images/icons/spells/Shadow_burst.png",
+      "../images/icons/spells/Blood_burst.png",
+      "../images/icons/spells/Ice_burst.png",
+      "../images/icons/spells/Smoke_barrage.png",
+      "../images/icons/spells/Shadow_barrage.png",
+      "../images/icons/spells/Blood_barrage.png",
+      "../images/icons/spells/Ice_barrage.png"
+    ];
+
+  // Create grid container element
+  var gridContainer = document.createElement("div");
+  gridContainer.classList.add("spell-grid-container");
+    
+  // Create spell option elements and append them to the grid container
+  spellOptions.forEach(function (spellOption) {
+    var spellImage = document.createElement("img");
+    spellImage.src = spellOption;
+    spellImage.classList.add("spell-image");
+
+    var spellAnchor = document.createElement("a");
+    spellAnchor.href = "#";
+    spellAnchor.appendChild(spellImage);
+
+    gridContainer.appendChild(spellAnchor);
+  });
+
+  // Append the grid container to the dropdown content
+  dropdownContent.appendChild(gridContainer);
+
+  // Show the dropdown content
+  dropdownContent.style.display = "block";
+
+  // Update the selected spell text
+  selectedSpellText.innerText = "Select Spell";
+    
+    // Add event listener to close the dropdown on outside click
+    document.addEventListener("mousedown", closeSpellDropdown);
+  }
   
-var magicLevelLabel = document.querySelector(".magic-level-label");
-magicLevelLabel.classList.add("show"); // Show the label
-
-function toggleSpellDropdown() {
-  var spellDropdown = document.getElementById("spell-dropdown-content");
-  spellDropdown.classList.toggle("show");
-}
-
+  function closeSpellDropdown(event) {
+    if (!event.target.closest(".dropdown")) {
+      spellDropdown.style.display = "none";
+      document.removeEventListener("mousedown", closeSpellDropdown);
+    }
+  }
+  
 function selectSpell(spell) {
   // Handle the selected spell
+  // ...
+  spellDropdown.style.display = "none";
+  document.removeEventListener("mousedown", closeSpellDropdown);
+}
+  
+function renderSpellGrid(spells, userMagicLevel) {
+  var spellGridContainer = document.createElement("div");
+  spellGridContainer.className = "spell-grid-container";
+
+  for (var i = 0; i < spells.length; i++) {
+    var spell = spells[i];
+    var spellImage = document.createElement("img");
+    spellImage.src = spell.imageURL;
+    spellImage.alt = spell.name;
+    spellImage.className = "spell-image";
+    
+    if (userMagicLevel < spell.requiredLevel) {
+      spellImage.classList.add("disabled");
+    }
+    
+    spellGridContainer.appendChild(spellImage);
+  }
+
+  // Append the spell grid container to the dropdown content
+  var spellDropdownContent = document.getElementById("spell-dropdown-content");
+  spellDropdownContent.innerHTML = "";
+  spellDropdownContent.appendChild(spellGridContainer);
 }
