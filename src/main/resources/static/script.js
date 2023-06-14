@@ -666,3 +666,180 @@ document.addEventListener('mousedown', function(event) {
         }
     }
 });
+
+// Function to toggle the location dropdown
+function toggleLocationDropdown() {
+    var locationDropdownContent = document.getElementById("location-dropdown-content");
+    locationDropdownContent.classList.toggle("show");
+  }
+  
+  // Function to toggle the monster dropdown
+  function toggleMonsterDropdown() {
+    var monsterDropdownContent = document.getElementById("monster-dropdown-content");
+    monsterDropdownContent.classList.toggle("show");
+  }
+  
+// Declare a variable to store burst locations globally
+var burstLocationsData;
+
+// Function to fetch burst locations from the server
+function fetchBurstLocations() {
+  fetch('/api/burst-locations')
+    .then(response => response.json())
+    .then(data => {
+      // Store burst locations data
+      burstLocationsData = data;
+      console.log('Burst locations retrieved:', burstLocationsData);
+
+      // Populate the dropdown with burst locations
+      populateLocationDropdown();
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
+
+// Function to populate the location dropdown with burst locations
+function populateLocationDropdown() {
+  var locationDropdownContent = document.getElementById("location-dropdown-content");
+
+  // Clear the previous content
+  locationDropdownContent.innerHTML = "";
+
+  // Loop through the burst locations and add options to the dropdown
+  burstLocationsData.forEach(function (burstLocation) {
+    var locationOption = document.createElement("a");
+    locationOption.href = "#";
+    locationOption.innerText = burstLocation.name;
+    locationOption.addEventListener("click", function () {
+      selectLocation(burstLocation.name);
+      populateMonsterDropdown(burstLocation.name);
+    });
+    locationDropdownContent.appendChild(locationOption);
+  });
+}
+
+// Call the function to fetch burst locations
+fetchBurstLocations();
+
+// Function to select a location
+function selectLocation(location) {
+  var selectedLocationText = document.getElementById("selected-location-text");
+  selectedLocationText.innerText = location;
+
+  // Call a function to populate the monster dropdown based on the selected location
+  populateMonsterDropdown(location);
+  toggleLocationDropdown();
+}
+
+// Function to populate the monster dropdown based on the selected location
+function populateMonsterDropdown(selectedLocation) {
+  var monsterDropdownContent = document.getElementById("monster-dropdown-content");
+
+  // Clear the previous content
+  monsterDropdownContent.innerHTML = "";
+
+  // Reset the selected monster text
+  var selectedMonsterText = document.getElementById("selected-monster-text");
+  selectedMonsterText.innerText = "Select Monster";
+
+  // Call a function to update the monster label without burstable count
+  updateMonsterLabel();
+
+  // Get the burst location based on the selected location
+  var burstLocation;
+  burstLocationsData.forEach(function (location) {
+    if (location.name === selectedLocation) {
+      burstLocation = location;
+      return;
+    }
+  });
+
+  console.log(burstLocation); // Check the value of burstLocation
+
+  // Populate the dropdown based on the burst location
+  if (burstLocation) {
+    var monsterCounts = burstLocation.monsterCounts;
+    for (var monster in monsterCounts) {
+      if (monsterCounts.hasOwnProperty(monster)) {
+        var burstableCount = monsterCounts[monster];
+        addMonsterOption(monster, burstableCount);
+      }
+    }
+  }
+}
+  
+function addMonsterOption(monster, burstableCount) {
+    var monsterDropdownContent = document.getElementById("monster-dropdown-content");
+    var monsterOption = document.createElement("a");
+    monsterOption.href = "#";
+    monsterOption.innerText = monster;
+    
+    // Add the data-monster attribute
+    monsterOption.setAttribute("data-monster", monster);
+    
+    monsterOption.setAttribute("data-burstable-count", burstableCount);
+  
+    monsterOption.addEventListener("click", function () {
+      selectMonster(monster);
+    });
+    
+    monsterDropdownContent.appendChild(monsterOption);
+  }
+  
+  
+// Function to update the monster label with the burstable count
+function updateMonsterLabel() {
+    var selectedMonsterText = document.getElementById("selected-monster-text");
+    var selectedMonster = selectedMonsterText.innerText;
+    var monsterLabel = document.getElementById("monster-label");
+
+    console.log("Selected Monster:", selectedMonster);
+
+    if (selectedMonster !== "Select Monster") {
+        console.log("Searching for option with data-monster:", selectedMonster);
+
+        var selector = "#monster-dropdown-content a[data-monster='" + selectedMonster + "']";
+        console.log("Selector:", selector);
+
+        var selectedOption = document.querySelector(selector);
+
+        console.log("Selected Option:", selectedOption);
+
+        if (selectedOption !== null) {
+        var burstableCount = selectedOption.getAttribute("data-burstable-count");
+        console.log("Burstable Count:", burstableCount);
+        monsterLabel.innerText = "Burstable monsters: " + burstableCount;
+        monsterLabel.style.display = "block";
+        return;
+        }
+    }
+
+    console.log("Monster Label not found for:", selectedMonster);
+    monsterLabel.style.display = "none";
+    }
+
+    // Function to select a monster
+    function selectMonster(monster) {
+    var selectedMonsterText = document.getElementById("selected-monster-text");
+    selectedMonsterText.innerText = monster;
+    console.log("Selected Monster:", monster);
+    updateMonsterLabel();
+    toggleMonsterDropdown();
+    }
+
+
+    // Call the function to update the monster label initially
+    updateMonsterLabel();
+  
+var magicLevelLabel = document.querySelector(".magic-level-label");
+magicLevelLabel.classList.add("show"); // Show the label
+
+function toggleSpellDropdown() {
+  var spellDropdown = document.getElementById("spell-dropdown-content");
+  spellDropdown.classList.toggle("show");
+}
+
+function selectSpell(spell) {
+  // Handle the selected spell
+}

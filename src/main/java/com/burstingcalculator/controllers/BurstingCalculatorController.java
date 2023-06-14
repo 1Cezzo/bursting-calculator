@@ -1,5 +1,6 @@
 package com.burstingcalculator.controllers;
 
+import com.burstingcalculator.model.BurstLocation;
 import com.burstingcalculator.model.Item;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,6 +21,7 @@ import org.springframework.ui.Model;
 
 @Controller
 public class BurstingCalculatorController {
+    private List<BurstLocation> burstLocations;
     @GetMapping("/")
     public String index(Model model) {
         // Add data to the model
@@ -423,6 +425,40 @@ public class BurstingCalculatorController {
 
         try {
             String json = objectMapperRing.writeValueAsString(listOfRings);
+            return ResponseEntity.ok(json);
+        } catch (JsonProcessingException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    public BurstingCalculatorController() {
+        burstLocations = new ArrayList<>();
+
+        // Initialize BurstLocations and add Monsters
+        BurstLocation smokeDungeon = new BurstLocation("Smoke Dungeon");
+        smokeDungeon.addMonster("Dust devils", 5);
+        smokeDungeon.addMonster("Smoke devils", 9);
+        burstLocations.add(smokeDungeon);
+
+        BurstLocation mmTunnels = new BurstLocation("MM Tunnels");
+        mmTunnels.addMonster("Maniacal Monkeys", 9);
+        mmTunnels.addMonster("Skeletons", 9);
+        mmTunnels.addMonster("Zombie Monkeys", 9);
+        burstLocations.add(mmTunnels);
+
+        BurstLocation catacombs = new BurstLocation("Catacombs of Kourend");
+        catacombs.addMonster("Ankou", 9);
+        catacombs.addMonster("Dust Devils", 9);
+        catacombs.addMonster("Greater Nechryaels", 9);
+        catacombs.addMonster("Nechryaels", 9);
+        burstLocations.add(catacombs);
+    }
+
+    @GetMapping("/api/burst-locations")
+    public ResponseEntity<String> getBurstLocations() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            String json = objectMapper.writeValueAsString(burstLocations);
             return ResponseEntity.ok(json);
         } catch (JsonProcessingException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

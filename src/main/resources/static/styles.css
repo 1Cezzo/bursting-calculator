@@ -65,6 +65,12 @@ h1 {
   display: inline-block;
 }
 
+.label {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .dropbtn {
   background-color: #007bff;
   color: #fff;
@@ -74,6 +80,10 @@ h1 {
   cursor: pointer;
   border-radius: 5px;
   margin: 10px;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #0056b3;
 }
 
 .dropdown-content {
@@ -95,12 +105,45 @@ h1 {
 }
 
 .dropdown-content a:hover {
-  background-color: #000;
+  background-color: #0056b3;
 }
 
 .show {
   display: block;
 }
+
+#monster-label {
+  display: none;
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 10px;
+  max-width: fit-content;
+}
+
+#monster-label.show {
+  display: block;
+}
+
+#magic-level-label {
+  display: none;
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  margin-right: 10px;
+  max-width: fit-content;
+}
+
+#magic-level-input:focus + #magic-level-label {
+  display: block;
+}
+
+#magic-level-label.show {
+  display: block;
+}
+
 
 input[id$="-search-input"] {
   /* Styles for all search inputs with IDs ending in "-search-input" */
@@ -242,4 +285,17 @@ img {
   border-color: #fff transparent transparent transparent;
   margin-left: 5px;
   vertical-align: middle;
+}
+
+.spell-selection {
+  display: flex;
+  align-items: center;
+}
+
+.spellbook-icon {
+  max-width: 30px;
+  height: auto;
+  background-image: url('../images/icons/spells/Ancient_spellbook.png');
+  background-size: cover;
+  cursor: pointer;
 }

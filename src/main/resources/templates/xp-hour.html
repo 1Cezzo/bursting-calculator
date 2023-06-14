@@ -171,6 +171,48 @@
             </div>
         </div>
     </div>
+    <div class="dropdown">
+        <button onclick="toggleLocationDropdown()" class="dropbtn">
+            <span id="selected-location-text">Select Location</span>
+            <span class="arrow-icon"></span>
+        </button>
+        <div id="location-dropdown-content" class="dropdown-content">
+            <a href="#" onclick="selectLocation('Smoke Dungeon')">Smoke Dungeon</a>
+            <a href="#" onclick="selectLocation('MM Tunnels')">MM Tunnels</a>
+            <a href="#" onclick="selectLocation('Catacombs of Kourend')">Catacombs of Kourend</a>
+            <!-- Add more location options here -->
+        </div>
+    </div>
+    <div class="dropdown">
+        <button onclick="toggleMonsterDropdown()" class="dropbtn">
+            <span id="selected-monster-text">Select Monster</span>
+            <span class="arrow-icon"></span>
+        </button>
+        <div id="monster-dropdown-content" class="dropdown-content">
+            <!-- This will be dynamically populated based on the selected location -->
+        </div>
+    </div>
+    <div class="label">
+        <label id="monster-label"></label>
+    </div>
+    <div class="label">
+      <label for="magic-level-input" id="magic-level-label">Magic Level:</label>
+      <input type="number" id="magic-level-input" min="62" max="99">
+    </div>
+    <div class="spell-selection">
+      <div class="dropdown">
+        <button onclick="toggleSpellDropdown()" class="dropbtn">
+          <span id="selected-spell-text">Select Spell </span>
+          <span class="spellbook-icon"></span>
+        </button>
+        <div id="spell-dropdown-content" class="dropdown-content">
+          <a href="#" onclick="selectSpell('Spell 1')">Spell 1</a>
+          <a href="#" onclick="selectSpell('Spell 2')">Spell 2</a>
+          <a href="#" onclick="selectSpell('Spell 3')">Spell 3</a>
+          <!-- Add more spell options here -->
+        </div>
+      </div>
+    </div>
     
     <table class="equipment equipment-right">
         <tbody>
@@ -262,7 +304,6 @@
         </tbody>
     </table>
 
-    <!-- Add your JavaScript file link here -->
     <script src="script.js"></script>
 </body>
 </html>
