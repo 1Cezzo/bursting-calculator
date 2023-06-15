@@ -833,6 +833,7 @@ function updateMonsterLabel() {
     updateMonsterLabel();
 
   var spellDropdown = document.querySelector(".spellbook-dropdown-content");
+  var selectedSpell = "";
 
   function toggleSpellDropdown() {
     var dropdownContent = document.querySelector(".spellbook-dropdown-content");
@@ -841,34 +842,38 @@ function updateMonsterLabel() {
     // Clear the existing content
     dropdownContent.innerHTML = "";
     
-    // Define the list of spell options (image URLs)
     var spellOptions = [
-      "../images/icons/spells/Smoke_burst.png",
-      "../images/icons/spells/Shadow_burst.png",
-      "../images/icons/spells/Blood_burst.png",
-      "../images/icons/spells/Ice_burst.png",
-      "../images/icons/spells/Smoke_barrage.png",
-      "../images/icons/spells/Shadow_barrage.png",
-      "../images/icons/spells/Blood_barrage.png",
-      "../images/icons/spells/Ice_barrage.png"
+      { name: "Smoke Burst", imageURL: "../images/icons/spells/Smoke_burst.png" },
+      { name: "Shadow Burst", imageURL: "../images/icons/spells/Shadow_burst.png" },
+      { name: "Blood Burst", imageURL: "../images/icons/spells/Blood_burst.png" },
+      { name: "Ice Burst", imageURL: "../images/icons/spells/Ice_burst.png" },
+      { name: "Smoke Barrage", imageURL: "../images/icons/spells/Smoke_barrage.png" },
+      { name: "Shadow Barrage", imageURL: "../images/icons/spells/Shadow_barrage.png" },
+      { name: "Blood Barrage", imageURL: "../images/icons/spells/Blood_barrage.png" },
+      { name: "Ice Barrage", imageURL: "../images/icons/spells/Ice_barrage.png" }
     ];
 
   // Create grid container element
   var gridContainer = document.createElement("div");
   gridContainer.classList.add("spell-grid-container");
     
-  // Create spell option elements and append them to the grid container
   spellOptions.forEach(function (spellOption) {
     var spellImage = document.createElement("img");
-    spellImage.src = spellOption;
+    spellImage.src = spellOption.imageURL;
     spellImage.classList.add("spell-image");
-
+  
     var spellAnchor = document.createElement("a");
     spellAnchor.href = "#";
     spellAnchor.appendChild(spellImage);
-
+  
+    // Add event listener to handle spell selection
+    spellAnchor.addEventListener("click", function () {
+      selectSpell(spellOption.name);
+    });
+  
     gridContainer.appendChild(spellAnchor);
   });
+  
 
   // Append the grid container to the dropdown content
   dropdownContent.appendChild(gridContainer);
@@ -883,19 +888,25 @@ function updateMonsterLabel() {
     document.addEventListener("mousedown", closeSpellDropdown);
   }
   
-  function closeSpellDropdown(event) {
-    if (!event.target.closest(".dropdown")) {
-      spellDropdown.style.display = "none";
-      document.removeEventListener("mousedown", closeSpellDropdown);
-    }
+function closeSpellDropdown(event) {
+  if (!event.target.closest(".dropdown")) {
+    spellDropdown.style.display = "none";
+    document.removeEventListener("mousedown", closeSpellDropdown);
   }
+}
   
-function selectSpell(spell) {
+function selectSpell(spellName) {
+  // Store the selected spell name
+  selectedSpell = spellName;
+
   // Handle the selected spell
   // ...
+
+  // Close the dropdown
   spellDropdown.style.display = "none";
   document.removeEventListener("mousedown", closeSpellDropdown);
 }
+  
   
 function renderSpellGrid(spells, userMagicLevel) {
   var spellGridContainer = document.createElement("div");
@@ -919,4 +930,78 @@ function renderSpellGrid(spells, userMagicLevel) {
   var spellDropdownContent = document.getElementById("spell-dropdown-content");
   spellDropdownContent.innerHTML = "";
   spellDropdownContent.appendChild(spellGridContainer);
+}
+
+// Function to update the selected items object
+function updateSelectedItems() {
+  const selectedItems = {
+    helmet: selectedHelmetText.textContent,
+    cape: selectedCapeText.textContent,
+    amulet: selectedAmuletText.textContent,
+    torso: selectedTorsoText.textContent,
+    weapon: selectedWeaponText.textContent,
+    shield: selectedShieldText.textContent,
+    legs: selectedLegsText.textContent,
+    gloves: selectedGlovesText.textContent,
+    boots: selectedBootsText.textContent,
+    ring: selectedRingText.textContent,
+    // Add other equipment items as needed
+  };
+
+  return selectedItems;
+}
+
+function updateSpreadsheet(selectedItems, magicLevel, selectedSpell) {
+  // Load the existing spreadsheet
+  const workbook = XLSX.readFile('data/dps_calculator.xslx');
+
+  // Select the desired worksheet within the spreadsheet
+  const worksheet = workbook.Sheets['Input'];
+
+  // Write the selected equipment items to specific cells
+  worksheet['E24:F24'].v = selectedItems.helmet;
+  worksheet['E25:F25'].v = selectedItems.cape;
+  worksheet['E26:F26'].v = selectedItems.amulet;
+  // Write other equipment items as needed
+
+  // Write the magic level to a cell
+  worksheet['E11'].v = magicLevel;
+
+  // Write the selected spell to a cell
+  worksheet['E21:F21'].v = '*choose spell* *magic*';
+  worksheet['E22:F22'].v = selectedSpell;
+  worksheet['E33:F33'].v = 'Ancient'
+
+  // Save the changes to the spreadsheet
+  XLSX.writeFile(workbook, 'data/dps_calculator.xslx');
+}
+
+async function getCalculatedDPS() {
+  try {
+    await Excel.run(async (context) => {
+      const sheet = context.workbook.worksheets.getActiveWorksheet();
+      const cell = sheet.getCell("M14");
+      cell.load("values");
+
+      await context.sync();
+
+      const calculatedDPS = cell.values[0][0];
+
+      // Use the calculatedDPS value as needed
+      console.log("Calculated DPS:", calculatedDPS);
+    });
+  } catch (error) {
+    console.error("Error retrieving calculated DPS:", error);
+  }
+}
+
+// Function to test the getCalculatedDPS function
+function testGetCalculatedDPS() {
+  // Update the spreadsheet first
+  const magicLevel = parseInt(document.getElementById('magic-level-input').value);
+  const selectedItems = updateSelectedItems();
+  updateSpreadsheet(selectedItems, magicLevel, selectedSpell);
+
+  // Call the getCalculatedDPS function to retrieve the value
+  getCalculatedDPS();
 }
